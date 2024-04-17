@@ -56,7 +56,6 @@ public class JwtFilter extends OncePerRequestFilter {
         try {
             claims = JwtUtils.parseToken(token);
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
             fallback(response);
             return ;
         }
@@ -94,6 +93,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private boolean isPermit(HttpServletRequest request) {
         String filterPath = request.getServletPath();
+        log.info(request.getServletPath());
 
         for (String path : permitPathConfig.getPermittedPath()) {
             if (MATCHER.match(filterPath, path)) {
