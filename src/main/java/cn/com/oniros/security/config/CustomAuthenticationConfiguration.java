@@ -45,12 +45,12 @@ public class CustomAuthenticationConfiguration {
         http
                 .sessionManagement(httpSecuritySessionManagementConfigurer ->
                         httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(registry ->
+                        registry.anyRequest().authenticated())
                 .authorizeHttpRequests(registry -> {
                     registry.requestMatchers("/asp/auth/v1/login").permitAll();
                     permittedPath.forEach(path -> registry.requestMatchers(path).permitAll());
                 })
-                .authorizeHttpRequests(registry ->
-                        registry.anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling(configure -> configure.authenticationEntryPoint(exceptionHandler));
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
