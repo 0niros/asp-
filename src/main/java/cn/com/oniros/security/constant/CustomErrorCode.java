@@ -12,7 +12,9 @@ public enum CustomErrorCode implements ErrorCode {
 
     AUTH_ERROR(10001L, "Authentication Failed"),
 
-    UNKNOWN_TOKEN(10002L, "Unknown Token");
+    UNKNOWN_TOKEN(10002L, "Unknown Token"),
+
+    USERNAME_OR_PASSWORD_ERROR(10003L, "Username or Password Error");
 
 
     private final Long errorCode;

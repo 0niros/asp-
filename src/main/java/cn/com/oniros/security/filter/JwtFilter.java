@@ -47,6 +47,7 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // 0. Whether uri permitted.
         if (isPermit(request)) {
+            log.info("[AUTH] Permit access: {}", request.getRequestURI());
             filterChain.doFilter(request, response);
         }
 
@@ -93,7 +94,6 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private boolean isPermit(HttpServletRequest request) {
         String filterPath = request.getServletPath();
-        log.info(request.getServletPath());
 
         for (String path : permitPathConfig.getPermittedPath()) {
             if (MATCHER.match(filterPath, path)) {

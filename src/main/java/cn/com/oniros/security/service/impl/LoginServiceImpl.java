@@ -46,7 +46,7 @@ public class LoginServiceImpl implements ILoginService {
                 new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
         if (authenticate == null) {
-            throw new CustomException(CustomErrorCode.AUTH_ERROR);
+            throw new CustomException(CustomErrorCode.USERNAME_OR_PASSWORD_ERROR);
         }
 
         // 1. Get user info and generate token.
